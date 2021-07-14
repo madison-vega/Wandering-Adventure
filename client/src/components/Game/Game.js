@@ -10,7 +10,6 @@ import { Link, useParams } from "react-router-dom";
 import "./game.css";
 
 const Game = (props) => {
-    console.log(props);
   const [userState, setUserState] = useState({
     attack: "",
     userID: "",
@@ -30,12 +29,10 @@ const Game = (props) => {
   const [displayState, setDisplayState] = useState({
     title: "",
     text: "",
-    userEffect: "",
-    enemyEffect: "",
   });
   const [gameState, setGameState] = useState({
     phase: "exploring",
-    encounters: 2,
+    encounters: 0,
     seenEncounters: [],
     userHealth: 100,
     maxMovement: 7,
@@ -44,43 +41,58 @@ const Game = (props) => {
 
   // Array for the battle options
   const redOptions = [
-    "I try to hit them",
-    "I start dancing like a butterfly",
-    "I try to sting like a Bee",
+    "Throw a mean right hook",
+    "Start dancing like a butterfly",
+    "Sting them like a Bee",
     "Bite them in the ear",
+    "German Suplex",
+    "Round house kick",
+    "You activated my trap card!"
   ];
   const blueOptions = [
     "I wave my Turkey leg in the air",
-    "I conjure a clone of myself ",
-    "I use Rasengan",
+    "Shadow Clone Jutsu!",
+    "Rasengan!",
     "I choose you Pickahu, lightning bolt",
+    "Expecto Patronum!",
+    "I summon Baby Dragon!"
   ];
   const greenOptions = [
-    "I dodge the attack",
-    "I sneaked close and snapped in their ear",
-    "I drop a smoke bomb",
+    "Dodge and strike",
+    "Sneak in close and snapped in their ear",
+    "Drop a smoke bomb",
     "Run at them naked",
+    "Throw shuriken at their feet",
+    "Ultra Instinct",
+    "Kamehameha!",
+    "Wingardium Leviosa!"
   ];
 
   // Arrays for directions
   const rightText = [
     "You go right, and walk over a dead body",
-    "You walk a past a pitch black cave",
-    "You step over a log",
+    "You walk past by a creepy pitch black cave, you can feel a dark aura from it",
+    "You find a tree fallen over after a storm, you crawl under it",
+    "You stumbled open large steps, once you're on top, you slip and fall down",
+    "You're walking along the road and you see a volcano erupt"
   ];
   const forwardText = [
-    "You walk by two old men playing chess",
-    "You cross a river",
+    "You walk by two old men playing chess on the side of road",
+    "You find a raging river, you build a raft and sail down the river",
     "You look ahead and see the most beautiful sight",
+    "You trip over a stone, you  look at it and it says 'Goodluck'",
+    "You get lost in thought and your foot falls through  the ground. You take a closer look and you catch a whiff of death. You keep moving."
   ];
   const leftText = [
-    "You walk by a merchant",
-    "You cross paths with an odd looking traveler",
-    "You see a bear cub with their mother",
+    "You walk by a merchant, selling clothes. They yell to get your attention, you keep looking forward",
+    "You cross paths with an odd looking traveler with a staff, you steady your hand ready for attack. They give you a nod and keep moving",
+    "You take a breath, as you sit you see a bear cub playing with their mother through the brush",
+    "As you're eating dinner, you hear a noise. You grab your weapon.... you're blinded by light and see beautiful stag",
+    "You gradually start to get cold, you see a heard of buffalo pass you by. They run around you, you stand in place"
   ];
 
   // Material UI Styling
-  const useStyles = makeStyles((theme) => ({
+  const useStyles = makeStyles(() => ({
     root: {
       flexGrow: 1,
     },
@@ -113,7 +125,6 @@ const Game = (props) => {
       }
     } while (flag);
 
-    console.log(event);
     gameState.seenEncounters.push(event.data.id);
     setDisplayState({
       ...displayState,
@@ -132,7 +143,6 @@ const Game = (props) => {
     } else if (event.data.type === "Noncombat") {
       setGameState({ ...gameState, phase: "NPC" });
     }
-    console.log("Seen encounters :" + gameState.seenEncounters);
   };
 
   // Restarts the game
@@ -190,7 +200,6 @@ const Game = (props) => {
     setCompState(choices[Math.floor(Math.random() * 3)]);
 
     if (userState.attack === "rock" && compState === "scissors") {
-      console.log("User wins");
       setDisplayState({
         ...displayState,
         text: "You drew blood!",
@@ -198,7 +207,6 @@ const Game = (props) => {
       });
       setEnemyState({ ...enemyState, health: enemyState.health - 10 });
     } else if (userState.attack === "rock" && compState === "paper") {
-      console.log("Comp wins");
       setDisplayState({
         ...displayState,
         text: "Your Enemy was to fast for you and struck you",
@@ -206,7 +214,6 @@ const Game = (props) => {
       });
       setGameState({ ...gameState, userHealth: gameState.userHealth - 5 });
     } else if (userState.attack === "scissors" && compState === "paper") {
-      console.log("User wins");
       setDisplayState({
         ...displayState,
         text: "You outsmarted your Enemy",
@@ -214,7 +221,6 @@ const Game = (props) => {
       });
       setEnemyState({ ...enemyState, health: enemyState.health - 10 });
     } else if (userState.attack === "scissors" && compState === "rock") {
-      console.log("Comp wins");
       setDisplayState({
         ...displayState,
         text: "Your were to slow this time",
@@ -222,7 +228,6 @@ const Game = (props) => {
       });
       setGameState({ ...gameState, userHealth: gameState.userHealth - 5 });
     } else if (userState.attack === "paper" && compState === "rock") {
-      console.log("User wins");
       setDisplayState({
         ...displayState,
         text: "You hit the Enemy",
@@ -230,7 +235,6 @@ const Game = (props) => {
       });
       setEnemyState({ ...enemyState, health: enemyState.health - 10 });
     } else if (userState.attack === "paper" && compState === "scissors") {
-      console.log("Com wins!");
       setDisplayState({
         ...displayState,
         text: "You've been hit",
@@ -238,7 +242,6 @@ const Game = (props) => {
       });
       setGameState({ ...gameState, userHealth: gameState.userHealth - 5 });
     } else {
-      console.log("It's a tie!");
       setDisplayState({
         ...displayState,
         text: "Battle was fierce but you each held your own",
@@ -249,9 +252,7 @@ const Game = (props) => {
   const { gameId, userId, charId } = useParams()
   // Start of the game
   useEffect(() => {
-    console.log(props)
     API.getCharacter(userId, charId).then((res) => {
-      console.log(res);
       if (res.data.class === "Mage") {
         setUserState({
           ...userState,
@@ -278,7 +279,6 @@ const Game = (props) => {
       });
     });
     API.getSeenEvents(2).then((res) => {
-      console.log(res.data);
       res.data.map((event) => {
         gameState.seenEncounters.push(event.id);
         return;
@@ -289,7 +289,6 @@ const Game = (props) => {
       text: 'You suddenly appear on an island, you cant remember anything. You hear a voice in your head saying 3 enemys will attack you. You can feel this to be true in your bones. You decide that forward is the way out...',
       title: "Who are you?"
     });
-    console.log(gameState.seenEncounters);
   }, [charId]);
 
   
@@ -300,6 +299,7 @@ const Game = (props) => {
     setUserState({ ...userState, attack: "" });
   }, [userState.attack]);
 
+  // Character Obj for the save
   const chr = {
     health: gameState.userHealth,
     id: charId,
@@ -338,15 +338,12 @@ const Game = (props) => {
         bio: "You find that there not all enemys",
         img: "https://i.pinimg.com/originals/55/15/8c/55158c9f1515b9f7afb257b312cc4e48.jpg",
       });
-      //   console.log(userId);
       // API Call to save the current progress
       API.updateCharacter(
         userId, //userID
         chr, //character object
         gameState.seenEncounters[gameState.seenEncounters.length - 1]
         );
-        
-        console.log(gameState.encounters);
       }
     }, [gameState.userHealth, enemyState.health]);
 
@@ -378,7 +375,7 @@ const Game = (props) => {
       setEnemyState({
         ...enemyState,
         name: "Dragorim the Black",
-        health: 1,
+        health: 110,
         stamina: 100,
         mana: 100,
         bio: "The most notorious mage known for human sacrificing to draw more power. He draws all his power from the Fox Fire.",
@@ -407,13 +404,10 @@ const Game = (props) => {
       });
     }
   }, [gameState.encounters]);
-  
-  console.log(gameState.currentMovement);
-  console.log(gameState.maxMovement);
-  console.log(gameState);
 
   return (
     <Grid container>
+      {/* User Card */}
       <Grid item xs={3}>
         <Card
           name={userState.chrName}
@@ -422,6 +416,7 @@ const Game = (props) => {
           bio={userState.bio}
         />
       </Grid>
+      {/* Game Section */}
       <Grid item xs={6} justifycontent="space-between">
         <Grid container id="gameSub">
           <Grid item xs={12}>
@@ -557,6 +552,7 @@ const Game = (props) => {
           </Grid>
         </Grid>
       </Grid>
+      {/* Enemy Card */}
       <Grid item xs={3}>
         <Card
           name={enemyState.name}
