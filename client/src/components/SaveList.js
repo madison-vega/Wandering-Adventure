@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
     },
     title: {
         margin: theme.spacing(4, 0, 2),
+        textAlign: 'center'
     },
 }));
 
@@ -69,19 +70,19 @@ export default function SaveList() {
     return (
         <div className={classes.root}>
             <Grid>
-                <Grid item xs={6} md={9}>
+                <Grid item xs={12} md={8}>
                     <Typography variant="h6" className={classes.title}>
-                        Pick your save game!
+                        Pick your character to continue!
                     </Typography>
                     <div className={classes.demo}>
                         <List dense={dense}>
                             {charState.character.map(char => {
                                 return (
                                     <ListItem key={char.id}>
-                                        <Link to={`/game/${char.id}/user/${char.user_id}`}>
+                                        <Link to={`/game/${char.game.id}/user/${char.user_id}/character/${char.id}`}>
                                             <Button onClick={() => charID()}>
                                                 <ListItemAvatar>
-                                                    {(char.class === 'mage' ? <Avatar src={mage} /> : <Avatar src={warrior} />)}
+                                                    {(char.class === 'Mage' ? <Avatar src={mage} /> : <Avatar src={warrior} />)}
                                                 </ListItemAvatar>
                                                 <ListItemText
                                                     primary={char.name}

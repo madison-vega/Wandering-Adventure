@@ -43,11 +43,10 @@ function App() {
     return <div> Loading </div>;
   }
 
-
   return (
     <Router>
       <div className="App">
-        <NavBar />
+      <NavBar />
         <br />
         <Switch>
           <PrivateRoute
@@ -69,11 +68,10 @@ function App() {
           />
 
           <PrivateRoute
-            exact path="/game/:gameId/user/:userId"
+            exact path="/game/:gameId/user/:userId/character/:charId"
             auth={isAuthenticated}
             component={Game}
           />
-
 
           <PrivateRoute
             exact path="/save"
