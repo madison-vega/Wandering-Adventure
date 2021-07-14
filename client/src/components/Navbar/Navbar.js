@@ -7,6 +7,7 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import LogoutButton from '../Logout'
 import { useAuth0 } from '@auth0/auth0-react';
 import './nav.css'
+import BackButton from '../BackButton'
 
 
 
@@ -49,6 +50,8 @@ export default function NavBar() {
                         <Typography variant="h3" className={classes.title}>
                             Wandering Adventure
                         </Typography>
+                        {isAuthenticated ? <BackButton /> : null}
+                        <br/>
                         {isAuthenticated ? <LogoutButton /> : null}
                     </Toolbar>
                 </ThemeProvider>
