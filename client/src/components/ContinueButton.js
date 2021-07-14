@@ -17,7 +17,10 @@ export default function ContinueButton() {
     return (
       <div className={classes.root}>
         <Link to='/save'>
-        <Button variant="contained">
+        <Button 
+        variant="contained"
+        color="primary"
+        >
           Continue Your Journey
         </Button>
         </Link>

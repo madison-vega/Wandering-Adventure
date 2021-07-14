@@ -23,7 +23,9 @@ No installation necessary to use our application.  Simply click the link below a
 
 Once on our live application site, you will be presented with our login page, clicking the enter button will route you to Auth0 verification, you may sign up with email or Google.  Once signed up you will be able to select your character and add your own custom name.  Once confirmed you will be routed to our game and presented with a scenario and options you will be able to choose.  Make your choices and have fun on your adventure.
 
-[Deployed Application](https://wanderingadventure.herokuapp.com/)
+[Deployed Application](https://wanderingadventure.herokuapp.com/)<br>
+
+![Demo](https://media.giphy.com/media/x2PmM7c8W5jbo2MCRQ/giphy.gif)
 
 
 ## Credits
