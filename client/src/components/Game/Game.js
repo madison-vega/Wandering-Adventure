@@ -71,18 +71,24 @@ const Game = (props) => {
   // Arrays for directions
   const rightText = [
     "You go right, and walk over a dead body",
-    "You walk a past a pitch black cave",
-    "You step over a log",
+    "You walk past by a creepy pitch black cave, you can feel a dark aura from it",
+    "You find a tree fallen over after a storm, you crawl under it",
+    "You stumbled open large steps, once you're on top, you slip and fall down",
+    "You're walking along the road and you see a volcano erupt"
   ];
   const forwardText = [
-    "You walk by two old men playing chess",
-    "You cross a river",
+    "You walk by two old men playing chess on the side of road",
+    "You find a raging river, you build a raft and sail down the river",
     "You look ahead and see the most beautiful sight",
+    "You trip over a stone, you  look at it and it says 'Goodluck'",
+    "You get lost in thought and your foot falls through  the ground. You take a closer look and you catch a whiff of death. You keep moving."
   ];
   const leftText = [
-    "You walk by a merchant",
-    "You cross paths with an odd looking traveler",
-    "You see a bear cub with their mother",
+    "You walk by a merchant, selling clothes. They yell to get your attention, you keep looking forward",
+    "You cross paths with an odd looking traveler with a staff, you steady your hand ready for attack. They give you a nod and keep moving",
+    "You take a breath, as you sit you see a bear cub playing with their mother through the brush",
+    "As you're eating dinner, you hear a noise. You grab your weapon.... you're blinded by light and see beautiful stag",
+    "You gradually start to get cold, you see a heard of buffalo pass you by. They run around you, you stand in place"
   ];
 
   // Material UI Styling
