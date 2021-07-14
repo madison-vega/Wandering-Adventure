@@ -41,22 +41,31 @@ const Game = (props) => {
 
   // Array for the battle options
   const redOptions = [
-    "I try to hit them",
-    "I start dancing like a butterfly",
-    "I try to sting like a Bee",
+    "Throw a mean right hook",
+    "Start dancing like a butterfly",
+    "Sting them like a Bee",
     "Bite them in the ear",
+    "German Suplex",
+    "Round house kick",
+    "You activated my trap card!"
   ];
   const blueOptions = [
     "I wave my Turkey leg in the air",
-    "I conjure a clone of myself ",
-    "I use Rasengan",
+    "Shadow Clone Jutsu!",
+    "Rasengan!",
     "I choose you Pickahu, lightning bolt",
+    "Expecto Patronum!",
+    "I summon Baby Dragon!"
   ];
   const greenOptions = [
-    "I dodge the attack",
-    "I sneaked close and snapped in their ear",
-    "I drop a smoke bomb",
+    "Dodge and strike",
+    "Sneak in close and snapped in their ear",
+    "Drop a smoke bomb",
     "Run at them naked",
+    "Throw shuriken at their feet",
+    "Ultra Instinct",
+    "Kamehameha!",
+    "Wingardium Leviosa!"
   ];
 
   // Arrays for directions
