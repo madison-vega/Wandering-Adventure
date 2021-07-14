@@ -41,7 +41,12 @@ export default function HomePage() {
     console.log(userId)
     API.getCharacters(userId)
       .then(res => {
-        setChState('true')
+        if (res.data.length > 0) {
+          setChState(true)
+
+        } else {
+          setChState(false)
+        }
         console.log(res.data)
       }
       )
@@ -65,9 +70,9 @@ export default function HomePage() {
                 <Container>
                   <StartButton />
                   <br />
-                  {chState === 'true' ? (
+                  {chState ? (
                     <ContinueButton />
-                    ) : null}
+                    ) : ''}
                 </Container>
               </div>
             </div>
