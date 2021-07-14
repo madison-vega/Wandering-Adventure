@@ -2,6 +2,7 @@
 
 ## Description
 
+A text adventure game that will truly test your skill. Start by creating your character and jumping into the adventure, or continuing your story. In battle you will have to pick between one of the options to see if you can outsmart your opponent. 
 
 
 
