@@ -10,7 +10,6 @@ import { Link, useParams } from "react-router-dom";
 import "./game.css";
 
 const Game = (props) => {
-    console.log(props);
   const [userState, setUserState] = useState({
     attack: "",
     userID: "",
@@ -30,12 +29,10 @@ const Game = (props) => {
   const [displayState, setDisplayState] = useState({
     title: "",
     text: "",
-    userEffect: "",
-    enemyEffect: "",
   });
   const [gameState, setGameState] = useState({
     phase: "exploring",
-    encounters: 2,
+    encounters: 0,
     seenEncounters: [],
     userHealth: 100,
     maxMovement: 7,
@@ -80,7 +77,7 @@ const Game = (props) => {
   ];
 
   // Material UI Styling
-  const useStyles = makeStyles((theme) => ({
+  const useStyles = makeStyles(() => ({
     root: {
       flexGrow: 1,
     },
@@ -113,7 +110,6 @@ const Game = (props) => {
       }
     } while (flag);
 
-    console.log(event);
     gameState.seenEncounters.push(event.data.id);
     setDisplayState({
       ...displayState,
@@ -132,7 +128,6 @@ const Game = (props) => {
     } else if (event.data.type === "Noncombat") {
       setGameState({ ...gameState, phase: "NPC" });
     }
-    console.log("Seen encounters :" + gameState.seenEncounters);
   };
 
   // Restarts the game
@@ -190,7 +185,6 @@ const Game = (props) => {
     setCompState(choices[Math.floor(Math.random() * 3)]);
 
     if (userState.attack === "rock" && compState === "scissors") {
-      console.log("User wins");
       setDisplayState({
         ...displayState,
         text: "You drew blood!",
@@ -198,7 +192,6 @@ const Game = (props) => {
       });
       setEnemyState({ ...enemyState, health: enemyState.health - 10 });
     } else if (userState.attack === "rock" && compState === "paper") {
-      console.log("Comp wins");
       setDisplayState({
         ...displayState,
         text: "Your Enemy was to fast for you and struck you",
@@ -206,7 +199,6 @@ const Game = (props) => {
       });
       setGameState({ ...gameState, userHealth: gameState.userHealth - 5 });
     } else if (userState.attack === "scissors" && compState === "paper") {
-      console.log("User wins");
       setDisplayState({
         ...displayState,
         text: "You outsmarted your Enemy",
@@ -214,7 +206,6 @@ const Game = (props) => {
       });
       setEnemyState({ ...enemyState, health: enemyState.health - 10 });
     } else if (userState.attack === "scissors" && compState === "rock") {
-      console.log("Comp wins");
       setDisplayState({
         ...displayState,
         text: "Your were to slow this time",
@@ -222,7 +213,6 @@ const Game = (props) => {
       });
       setGameState({ ...gameState, userHealth: gameState.userHealth - 5 });
     } else if (userState.attack === "paper" && compState === "rock") {
-      console.log("User wins");
       setDisplayState({
         ...displayState,
         text: "You hit the Enemy",
@@ -230,7 +220,6 @@ const Game = (props) => {
       });
       setEnemyState({ ...enemyState, health: enemyState.health - 10 });
     } else if (userState.attack === "paper" && compState === "scissors") {
-      console.log("Com wins!");
       setDisplayState({
         ...displayState,
         text: "You've been hit",
@@ -238,7 +227,6 @@ const Game = (props) => {
       });
       setGameState({ ...gameState, userHealth: gameState.userHealth - 5 });
     } else {
-      console.log("It's a tie!");
       setDisplayState({
         ...displayState,
         text: "Battle was fierce but you each held your own",
@@ -249,9 +237,7 @@ const Game = (props) => {
   const { gameId, userId, charId } = useParams()
   // Start of the game
   useEffect(() => {
-    console.log(props)
     API.getCharacter(userId, charId).then((res) => {
-      console.log(res);
       if (res.data.class === "Mage") {
         setUserState({
           ...userState,
@@ -278,7 +264,6 @@ const Game = (props) => {
       });
     });
     API.getSeenEvents(2).then((res) => {
-      console.log(res.data);
       res.data.map((event) => {
         gameState.seenEncounters.push(event.id);
         return;
@@ -289,7 +274,6 @@ const Game = (props) => {
       text: 'You suddenly appear on an island, you cant remember anything. You hear a voice in your head saying 3 enemys will attack you. You can feel this to be true in your bones. You decide that forward is the way out...',
       title: "Who are you?"
     });
-    console.log(gameState.seenEncounters);
   }, [charId]);
 
   
@@ -300,6 +284,7 @@ const Game = (props) => {
     setUserState({ ...userState, attack: "" });
   }, [userState.attack]);
 
+  // Character Obj for the save
   const chr = {
     health: gameState.userHealth,
     id: charId,
@@ -338,15 +323,12 @@ const Game = (props) => {
         bio: "You find that there not all enemys",
         img: "https://i.pinimg.com/originals/55/15/8c/55158c9f1515b9f7afb257b312cc4e48.jpg",
       });
-      //   console.log(userId);
       // API Call to save the current progress
       API.updateCharacter(
         userId, //userID
         chr, //character object
         gameState.seenEncounters[gameState.seenEncounters.length - 1]
         );
-        
-        console.log(gameState.encounters);
       }
     }, [gameState.userHealth, enemyState.health]);
 
@@ -378,7 +360,7 @@ const Game = (props) => {
       setEnemyState({
         ...enemyState,
         name: "Dragorim the Black",
-        health: 1,
+        health: 110,
         stamina: 100,
         mana: 100,
         bio: "The most notorious mage known for human sacrificing to draw more power. He draws all his power from the Fox Fire.",
@@ -407,13 +389,10 @@ const Game = (props) => {
       });
     }
   }, [gameState.encounters]);
-  
-  console.log(gameState.currentMovement);
-  console.log(gameState.maxMovement);
-  console.log(gameState);
 
   return (
     <Grid container>
+      {/* User Card */}
       <Grid item xs={3}>
         <Card
           name={userState.chrName}
@@ -422,6 +401,7 @@ const Game = (props) => {
           bio={userState.bio}
         />
       </Grid>
+      {/* Game Section */}
       <Grid item xs={6} justifycontent="space-between">
         <Grid container id="gameSub">
           <Grid item xs={12}>
@@ -557,6 +537,7 @@ const Game = (props) => {
           </Grid>
         </Grid>
       </Grid>
+      {/* Enemy Card */}
       <Grid item xs={3}>
         <Card
           name={enemyState.name}
